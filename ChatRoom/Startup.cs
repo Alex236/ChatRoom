@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ChatRoom.DbUserAccounts;
+using ChatRoom.Hubs;
 
 
 namespace ChatRoom
@@ -38,6 +39,7 @@ namespace ChatRoom
                 });
 
             services.AddMvc();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,11 +60,15 @@ namespace ChatRoom
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chatHub");
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Authorization}/{action=Login}/{id?}");
+                    template: "{controller=Chat}/{action=OnlineChat}/{id?}");
             });
         }
     }
