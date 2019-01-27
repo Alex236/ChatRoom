@@ -68,7 +68,7 @@ namespace ChatRoom
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Chat}/{action=OnlineChat}/{id?}");
+                    template: "{controller=Chat}/{action=ChatList}/{id?}");
             });
         }
     }
