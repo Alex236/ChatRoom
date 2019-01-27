@@ -17,7 +17,7 @@ namespace ChatRoom.Hubs
             await base.OnDisconnectedAsync(exception);
         }
 
-        public async Task SendMessage(string user, string message)
+        public async Task SendMessage(string message)
         {
             var user1 = Context.User;
             await Clients.All.SendAsync("ReceiveMessage", user1.Identity.Name, message);
