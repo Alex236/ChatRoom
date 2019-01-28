@@ -1,5 +1,16 @@
-﻿<ul>
-    <li><a asp-action="OnlineChatRoom1" asp-controller="Chat">ChatRoom1</a></li>
-    <li><a asp-action="OnlineChatRoom2" asp-controller="Chat">ChatRoom2</a></li>
-    <li><a asp-action="OnlineChatRoom3" asp-controller="Chat">ChatRoom3</a></li>
+﻿@model List<ChatRoom.Chats.Chat>
+
+<ul>
+    <a asp-action="AddChatRoom" asp-controller="Chat">Add Chat Room</a></br>
+    <a asp-action="DeleteChatRoom" asp-controller="Chat">Delete Chat Room</a></br>
+    <a asp-action="ChooseChat" asp-controller="Chat">Choose Chat Room</a></br>
+
+    @foreach (var chat in Model)
+    {
+        <li>
+            <a asp-action="OnlineChatRoom" asp-controller="Chat">
+                @chat.Name;
+            </a>
+        </li>
+    }
 </ul>

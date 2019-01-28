@@ -4,7 +4,6 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using ChatRoom.DbUserAccounts;
 using ChatRoom.Models.AuthorizationModel;
-using ChatRoom.ConsoleReport;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -16,16 +15,14 @@ namespace ChatRoom.Controllers
     {
         private UserAccountContext userAccountContext;
 
-        public AuthorizationController(UserAccountContext accountContext)
+        public AuthorizationController(UserAccountContext userAccountContext)
         {
-            Info.Output("Created BD of users in AccountController");
-            userAccountContext = accountContext;
+            this.userAccountContext = userAccountContext;
         }
 
         [HttpGet]
         public IActionResult Login()
         {
-            Info.Output("Login HttpGet");
             return View();
         }
 
@@ -33,7 +30,6 @@ namespace ChatRoom.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel loginModel)
         {
-            Info.Output("Login HttpPost");
             if (ModelState.IsValid)
             {
                 UserAccount userAccount = await userAccountContext.UserAccounts.FirstOrDefaultAsync(u
@@ -51,7 +47,6 @@ namespace ChatRoom.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            Info.Output("Register HttpGet");
             return View();
         }
 
@@ -59,9 +54,6 @@ namespace ChatRoom.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterModel registerModel)
         {
-            Info.Output("Register HttpPost");
-            Info.Output(registerModel.Name);
-            Info.Output(registerModel.Password);
             if (ModelState.IsValid)
             {
                 UserAccount userAccount = await userAccountContext.UserAccounts.FirstOrDefaultAsync(u
@@ -83,7 +75,6 @@ namespace ChatRoom.Controllers
 
         private async Task Authenticate(string userName)
         {
-            Info.Output("Authenticate");
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, userName)

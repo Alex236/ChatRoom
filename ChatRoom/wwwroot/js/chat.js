@@ -1,5 +1,4 @@
-﻿
-var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+﻿var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
 connection.on("ReceiveMessage", function (user, message) {
     var date = new Date();
