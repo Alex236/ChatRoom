@@ -1,10 +1,15 @@
 ﻿<a asp-action="Logout" asp-controller="Chat">Logout</a>
-<a>Add Chat Room</a>
-<a>Delete Chat Room</a>
-<div class="container">
+
+<div>
+     Chat<input type="text" id="chatNameInput" />
+    <input type="button" id="sendChatName" value="Enter Chat" />
+</div>
+
+<div>
     <ul id="messagesList"></ul>
     Message<input type="text" id="messageInput" />
-    <input type="button" id="sendButton" value="Send Message" />
+    <input type="button" id="sendMessageButton" value="Send Message" />
 </div>
+
 <script src="~/lib/signalr/signalr.js"></script>
 <script src="~/js/chat.js"></script>

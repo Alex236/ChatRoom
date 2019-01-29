@@ -37,7 +37,7 @@ namespace ChatRoom.Controllers
                 if(userAccount != null)
                 {
                     await Authenticate(loginModel.Name);
-                    return RedirectToAction("ChatList", "Chat");
+                    return RedirectToAction("OnlineChatRoom", "Chat");
                 }
                 ModelState.AddModelError("", "Incorrect name or password");
             }
@@ -63,7 +63,7 @@ namespace ChatRoom.Controllers
                     userAccountContext.UserAccounts.Add( new UserAccount { Name = registerModel.Name, Password = registerModel.Password } );
                     await userAccountContext.SaveChangesAsync();
                     await Authenticate(registerModel.Name);
-                    return RedirectToAction("ChatList", "Chat");
+                    return RedirectToAction("OnlineChatRoom", "Chat");
                 }
                 else
                 {
